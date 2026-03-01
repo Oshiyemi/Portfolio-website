@@ -17,8 +17,8 @@ const PROJECTS = [
   {
     title: "Movie Discovery App",
     summary: "Search titles, save watchlists, and discover trending releases.",
-    codeUrl: "https://github.com/your-username/movie-discovery-app",
-    visitUrl: "https://movie-discovery-demo.example.com",
+    codeUrl: "https://github.com/Oshiyemi/Movie-tracker-website.git",
+    visitUrl: "https://kod-movietracker.netlify.app/",
   },
   {
     title: "Task Planner",

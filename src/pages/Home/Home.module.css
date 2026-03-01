@@ -1,6 +1,7 @@
 .homeSection {
   display: flex;
   align-items: center;
+  padding-top: calc(72px + 0.9rem);
 }
 
 .container {
