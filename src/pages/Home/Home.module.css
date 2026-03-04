@@ -20,25 +20,35 @@
   display: inline-flex;
   align-items: center;
   gap: 0.42rem;
+  appearance: none;
   border: 1px solid var(--color-border);
   background: var(--color-card);
   color: var(--color-accent);
   border-radius: 999px;
   padding: 0.34rem 0.78rem;
+  cursor: pointer;
   font-size: 0.77rem;
+  font-family: inherit;
   font-weight: 600;
   letter-spacing: 0.03em;
   text-transform: uppercase;
-  perspective: 1000px;
   overflow: hidden;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.kicker:hover,
+.kicker:focus-visible {
+  transform: translateY(-1px);
+  border-color: var(--color-border-strong);
+  box-shadow: 0 12px 20px -18px rgba(94, 234, 212, 0.8);
 }
 
 .kickerReady {
   animation: kickerEnter 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
-}
-
-.kickerHovering .kickerInner {
-  transform: rotateX(0deg) scale(1.03);
 }
 
 .kicker::before {
@@ -50,30 +60,39 @@
   box-shadow: 0 0 10px rgba(94, 234, 212, 0.75);
 }
 
-.kickerInner {
-  position: relative;
-  display: inline-block;
-  transform-style: preserve-3d;
-  transition: transform 0.75s cubic-bezier(0.22, 0.61, 0.36, 1);
-  will-change: transform;
-}
-
-.kickerFlipped {
-  transform: rotateX(180deg);
-}
-
-.kickerFaceFront,
-.kickerFaceBack {
+.kickerText {
   display: block;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
   white-space: nowrap;
 }
 
-.kickerFaceBack {
-  position: absolute;
-  inset: 0;
-  transform: rotateX(180deg);
+.kickerTextViewport {
+  position: relative;
+  display: inline-grid;
+  align-items: center;
+  min-height: 1.2em;
+  overflow: hidden;
+}
+
+.kickerTextSizer {
+  grid-area: 1 / 1;
+  visibility: hidden;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.kickerTextLayer {
+  grid-area: 1 / 1;
+  display: block;
+  white-space: nowrap;
+  will-change: opacity, transform;
+}
+
+.kickerTextEnter {
+  animation: kickerTextEnter 0.42s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.kickerTextExit {
+  animation: kickerTextExit 0.42s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @keyframes kickerEnter {
@@ -85,6 +104,28 @@
   }
   100% {
     transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes kickerTextEnter {
+  0% {
+    opacity: 0;
+    transform: translateY(0.3rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes kickerTextExit {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-0.3rem);
   }
 }
 
@@ -278,5 +319,15 @@
   .kicker {
     font-size: 0.72rem;
     padding: 0.32rem 0.68rem;
+  }
+
+  .kickerTextViewport {
+    max-width: 12rem;
+  }
+
+  .kickerTextSizer,
+  .kickerTextLayer {
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }

@@ -1,16 +1,23 @@
-import React, { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import emailjs from "@emailjs/browser";
 import styles from "./Contactus.module.css";
 
 const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
 const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+const FIELD_LIMITS = {
+  name: 80,
+  email: 120,
+  role: 120,
+  message: 1200,
+};
 
 const INITIAL_FORM_DATA = {
   name: "",
   email: "",
   role: "",
   message: "",
+  website: "",
 };
 
 function Contact() {
@@ -52,21 +59,35 @@ function Contact() {
 
   const validate = () => {
     const nextErrors = {};
+    const nameValue = formData.name.trim();
+    const emailValue = formData.email.trim();
+    const roleValue = formData.role.trim();
+    const messageValue = formData.message.trim();
 
-    if (!formData.name.trim()) {
+    if (!nameValue) {
       nextErrors.name = "Please enter your name.";
-    } else if (formData.name.trim().length < 2) {
+    } else if (nameValue.length < 2) {
       nextErrors.name = "Name must be at least 2 characters.";
+    } else if (nameValue.length > FIELD_LIMITS.name) {
+      nextErrors.name = `Name must be ${FIELD_LIMITS.name} characters or fewer.`;
     }
 
-    if (!formData.email.trim()) {
+    if (!emailValue) {
       nextErrors.email = "Please enter your email.";
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue)) {
       nextErrors.email = "Please enter a valid email address.";
+    } else if (emailValue.length > FIELD_LIMITS.email) {
+      nextErrors.email = `Email must be ${FIELD_LIMITS.email} characters or fewer.`;
     }
 
-    if (!formData.role.trim()) {
+    if (!roleValue) {
       nextErrors.role = "Please tell me what you want me to do.";
+    } else if (roleValue.length > FIELD_LIMITS.role) {
+      nextErrors.role = `Role details must be ${FIELD_LIMITS.role} characters or fewer.`;
+    }
+
+    if (messageValue.length > FIELD_LIMITS.message) {
+      nextErrors.message = `Message must be ${FIELD_LIMITS.message} characters or fewer.`;
     }
 
     setErrors(nextErrors);
@@ -76,6 +97,15 @@ function Contact() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setSubmitStatus({ type: "idle", message: "" });
+
+    if (formData.website.trim()) {
+      setSubmitStatus({
+        type: "success",
+        message: "Message sent successfully. I will get back to you soon.",
+      });
+      setFormData(INITIAL_FORM_DATA);
+      return;
+    }
 
     if (!validate()) {
       return;
@@ -250,6 +280,8 @@ function Contact() {
               placeholder="Your name"
               value={formData.name}
               onChange={handleChange}
+              autoComplete="name"
+              maxLength={FIELD_LIMITS.name}
               aria-invalid={Boolean(errors.name)}
               aria-describedby={errors.name ? "name-error" : undefined}
             />
@@ -270,6 +302,9 @@ function Contact() {
               placeholder="you@company.com"
               value={formData.email}
               onChange={handleChange}
+              autoComplete="email"
+              inputMode="email"
+              maxLength={FIELD_LIMITS.email}
               aria-invalid={Boolean(errors.email)}
               aria-describedby={errors.email ? "email-error" : undefined}
             />
@@ -290,6 +325,8 @@ function Contact() {
               placeholder="Frontend build, full-stack app, bug fixes..."
               value={formData.role}
               onChange={handleChange}
+              autoComplete="organization-title"
+              maxLength={FIELD_LIMITS.role}
               aria-invalid={Boolean(errors.role)}
               aria-describedby={errors.role ? "role-error" : undefined}
             />
@@ -309,10 +346,31 @@ function Contact() {
               placeholder="Tell me about your role, project, or idea."
               value={formData.message}
               onChange={handleChange}
+              maxLength={FIELD_LIMITS.message}
+              aria-invalid={Boolean(errors.message)}
+              aria-describedby={errors.message ? "message-error" : undefined}
             />
             <p className={styles.helperText}>
               Include any extra details if you want.
             </p>
+            {errors.message ? (
+              <p id="message-error" className={styles.errorText}>
+                {errors.message}
+              </p>
+            ) : null}
+
+            <div className={styles.honeypotField} aria-hidden="true">
+              <label htmlFor="website">Website</label>
+              <input
+                id="website"
+                name="website"
+                type="text"
+                tabIndex={-1}
+                autoComplete="off"
+                value={formData.website}
+                onChange={handleChange}
+              />
+            </div>
 
             <button
               className={styles.submitButton}

@@ -1,0 +1,158 @@
+.card {
+  height: 100%;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  background: var(--color-card);
+  box-shadow: var(--shadow-soft);
+  display: grid;
+  grid-template-rows: auto 1fr;
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border-color: var(--color-border-strong);
+  box-shadow: var(--shadow-card);
+}
+
+.iconPanel {
+  padding: 1.18rem 1.18rem 0;
+}
+
+.iconWrap {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 18px;
+  border: 1px solid var(--color-border-strong);
+  background: var(--color-surface);
+  color: var(--color-accent);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.projectIcon {
+  display: block;
+}
+
+.body {
+  padding: 1.05rem 1.18rem 1.18rem;
+  display: grid;
+  align-content: start;
+  gap: 0.78rem;
+}
+
+.title {
+  margin: 0;
+  color: var(--color-heading);
+  font-size: 1rem;
+}
+
+.summary {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 0.88rem;
+  line-height: 1.65;
+}
+
+.actions {
+  margin-top: 0.25rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.68rem;
+}
+
+.actionButton {
+  text-decoration: none;
+  border-radius: 10px;
+  padding: 0.58rem 0.72rem;
+  font-size: 0.84rem;
+  font-weight: 600;
+  border: 1px solid var(--color-border-strong);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.42em;
+  line-height: 1.2;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    color 0.2s ease,
+    background 0.2s ease;
+}
+
+.codeButton {
+  background: var(--interactive-gradient);
+  color: var(--btn-text);
+  border-color: transparent;
+  box-shadow: 0 10px 16px -12px rgba(94, 234, 212, 0.88);
+}
+
+.visitButton {
+  background: var(--color-surface);
+  color: var(--color-heading);
+}
+
+.actionButton:hover,
+.actionButton:focus-visible {
+  transform: translateY(-2px) scale(1.01);
+}
+
+.codeButton:hover,
+.codeButton:focus-visible {
+  box-shadow: 0 14px 20px -14px rgba(94, 234, 212, 0.95);
+}
+
+.visitButton:hover,
+.visitButton:focus-visible {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.link {
+  margin-top: auto;
+  padding-top: 0.3rem;
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.42em;
+  line-height: 1.2;
+  text-decoration: none;
+  color: var(--color-accent);
+  font-weight: 600;
+  font-size: 0.84rem;
+}
+
+.actionButton svg,
+.link svg {
+  width: 1em;
+  height: 1em;
+  display: block;
+  flex-shrink: 0;
+}
+
+.link:hover,
+.link:focus-visible {
+  color: var(--color-accent-2);
+}
+
+@media (max-width: 420px) {
+  .iconPanel {
+    padding: 1.05rem 1.05rem 0;
+  }
+
+  .body {
+    padding: 0.98rem 1.05rem 1.05rem;
+    gap: 0.72rem;
+  }
+
+  .actions {
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+  }
+}

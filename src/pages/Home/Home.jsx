@@ -2,77 +2,147 @@ import { useEffect, useRef, useState } from "react";
 import styles from "./Home.module.css";
 import profileImage from "../../assets/new image.jpg";
 
+const ROTATING_TEXTS = ["Hi I'm Oshiyemi David", "Full Stack Developer"];
+const PRIMARY_TEXT = ROTATING_TEXTS[1];
+const AUTO_ROTATE_DELAY_MS = 3800;
+const REVERT_DELAY_MS = 3000;
+const TEXT_TRANSITION_MS = 420;
+const LONGEST_KICKER_TEXT = ROTATING_TEXTS.reduce((longestText, currentText) =>
+  currentText.length > longestText.length ? currentText : longestText
+);
+
+function getNextText(currentText) {
+  const currentIndex = ROTATING_TEXTS.indexOf(currentText);
+  const safeIndex = currentIndex === -1 ? 0 : currentIndex;
+
+  return ROTATING_TEXTS[(safeIndex + 1) % ROTATING_TEXTS.length];
+}
+
 function Home() {
-  const [showTitle, setShowTitle] = useState(false);
-  const [isHovering, setIsHovering] = useState(false);
-  const hoverResetRef = useRef(null);
+  const [displayedText, setDisplayedText] = useState(ROTATING_TEXTS[0]);
+  const [exitingText, setExitingText] = useState("");
+  const [hasAutoRotated, setHasAutoRotated] = useState(false);
+  const autoRotateTimeoutRef = useRef(null);
+  const revertTimeoutRef = useRef(null);
+  const textTransitionTimeoutRef = useRef(null);
+  const displayedTextRef = useRef(ROTATING_TEXTS[0]);
+
+  function transitionToText(nextText) {
+    const currentText = displayedTextRef.current;
+
+    if (currentText === nextText) {
+      return;
+    }
+
+    setExitingText(currentText);
+    setDisplayedText(nextText);
+    displayedTextRef.current = nextText;
+
+    if (textTransitionTimeoutRef.current !== null) {
+      window.clearTimeout(textTransitionTimeoutRef.current);
+    }
+
+    textTransitionTimeoutRef.current = window.setTimeout(() => {
+      setExitingText("");
+      textTransitionTimeoutRef.current = null;
+    }, TEXT_TRANSITION_MS);
+  }
 
   useEffect(() => {
-    const timeoutId = window.setTimeout(() => {
-      setShowTitle(true);
-    }, 3800);
+    displayedTextRef.current = displayedText;
+  }, [displayedText]);
+
+  useEffect(() => {
+    if (!hasAutoRotated) {
+      autoRotateTimeoutRef.current = window.setTimeout(() => {
+        transitionToText(PRIMARY_TEXT);
+        setHasAutoRotated(true);
+        autoRotateTimeoutRef.current = null;
+      }, AUTO_ROTATE_DELAY_MS);
+    }
 
     return () => {
-      window.clearTimeout(timeoutId);
-      if (hoverResetRef.current) {
-        window.clearTimeout(hoverResetRef.current);
+      if (autoRotateTimeoutRef.current !== null) {
+        window.clearTimeout(autoRotateTimeoutRef.current);
+        autoRotateTimeoutRef.current = null;
+      }
+    };
+  }, [hasAutoRotated]);
+
+  useEffect(() => {
+    return () => {
+      if (autoRotateTimeoutRef.current !== null) {
+        window.clearTimeout(autoRotateTimeoutRef.current);
+        autoRotateTimeoutRef.current = null;
+      }
+
+      if (revertTimeoutRef.current !== null) {
+        window.clearTimeout(revertTimeoutRef.current);
+        revertTimeoutRef.current = null;
+      }
+
+      if (textTransitionTimeoutRef.current !== null) {
+        window.clearTimeout(textTransitionTimeoutRef.current);
+        textTransitionTimeoutRef.current = null;
       }
     };
   }, []);
 
-  const handlePointerEnter = () => {
-    if (showTitle) {
-      setIsHovering(true);
+  const handleKickerClick = () => {
+    if (autoRotateTimeoutRef.current !== null) {
+      window.clearTimeout(autoRotateTimeoutRef.current);
+      autoRotateTimeoutRef.current = null;
     }
+
+    if (!hasAutoRotated) {
+      setHasAutoRotated(true);
+    }
+
+    transitionToText(getNextText(displayedTextRef.current));
+
+    if (revertTimeoutRef.current !== null) {
+      window.clearTimeout(revertTimeoutRef.current);
+    }
+
+    revertTimeoutRef.current = window.setTimeout(() => {
+      transitionToText(PRIMARY_TEXT);
+      revertTimeoutRef.current = null;
+    }, REVERT_DELAY_MS);
   };
-
-  const handlePointerLeave = () => {
-    setIsHovering(false);
-    if (hoverResetRef.current) {
-      window.clearTimeout(hoverResetRef.current);
-    }
-  };
-
-  const handlePointerDown = (event) => {
-    if (!showTitle || event.pointerType !== "touch") {
-      return;
-    }
-
-    setIsHovering(true);
-
-    if (hoverResetRef.current) {
-      window.clearTimeout(hoverResetRef.current);
-    }
-
-    hoverResetRef.current = window.setTimeout(() => {
-      setIsHovering(false);
-    }, 1100);
-  };
-
-  const showIntroText = !showTitle || isHovering;
 
   return (
     <section id="home" className={styles.homeSection}>
       <div className={styles.container}>
         <div className={styles.hero}>
-          <span
-            className={`${styles.kicker} ${showTitle ? styles.kickerReady : ""} ${
-              isHovering ? styles.kickerHovering : ""
-            }`}
+          <button
+            type="button"
+            className={`${styles.kicker} ${hasAutoRotated ? styles.kickerReady : ""}`}
             aria-live="polite"
-            onPointerEnter={handlePointerEnter}
-            onPointerLeave={handlePointerLeave}
-            onPointerDown={handlePointerDown}
+            aria-atomic="true"
+            aria-label="Rotate introduction text"
+            onClick={handleKickerClick}
           >
-            <span
-              className={`${styles.kickerInner} ${
-                showIntroText ? "" : styles.kickerFlipped
-              }`}
-            >
-              <span className={styles.kickerFaceFront}>Hi I&apos;m Oshiyemi David</span>
-              <span className={styles.kickerFaceBack}>Full Stack Developer</span>
+            <span className={styles.kickerTextViewport}>
+              <span className={styles.kickerTextSizer} aria-hidden="true">
+                {LONGEST_KICKER_TEXT}
+              </span>
+              {exitingText ? (
+                <span
+                  key={`exiting-${exitingText}`}
+                  className={`${styles.kickerTextLayer} ${styles.kickerTextExit}`}
+                  aria-hidden="true"
+                >
+                  {exitingText}
+                </span>
+              ) : null}
+              <span
+                key={displayedText}
+                className={`${styles.kickerTextLayer} ${styles.kickerTextEnter}`}
+              >
+                {displayedText}
+              </span>
             </span>
-          </span>
+          </button>
           <h1 className={styles.header}>
             Transforming ideas into reliable and engaging digital products.
           </h1>
