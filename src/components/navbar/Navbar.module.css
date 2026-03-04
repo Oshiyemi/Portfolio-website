@@ -17,7 +17,7 @@
 
 .logo {
   display: inline-flex;
-  width: clamp(90px, 12vw, 118px);
+  width: clamp(76px, 10vw, 98px);
   text-decoration: none;
 }
 
@@ -25,6 +25,14 @@
   width: 100%;
   height: auto;
   object-fit: contain;
+}
+
+.logoImage {
+  display: block;
+}
+
+.logoDark {
+  filter: brightness(0) invert(1);
 }
 
 .links {
@@ -192,6 +200,6 @@
   }
 
   .logo {
-    width: 92px;
+    width: 80px;
   }
 }

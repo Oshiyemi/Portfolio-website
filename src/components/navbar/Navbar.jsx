@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "./Navbar.module.css";
-import logo from "../../assets/logo new.png";
+import logo from "../../assets/new-logo.png";
 import sunIcon from "../../assets/sun.svg";
 import moonIcon from "../../assets/moon.svg";
 
@@ -55,7 +55,11 @@ function Navbar() {
   return (
     <nav className={styles.nav}>
       <a href="#home" className={styles.logo} aria-label="Go to Home section">
-        <img src={logo} alt="Portfolio logo" />
+        <img
+          src={logo}
+          alt="Portfolio logo"
+          className={`${styles.logoImage} ${isDark ? styles.logoDark : ""}`}
+        />
       </a>
 
       <div className={`${styles.links} ${menuOpen ? styles.open : ""}`}>

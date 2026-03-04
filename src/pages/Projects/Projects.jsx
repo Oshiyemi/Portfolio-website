@@ -11,8 +11,8 @@ const PROJECTS = [
   {
     title: "Ecommerce Website",
     summary: "Manage products, orders, and customer activity through a clean storefront experience.",
-    codeUrl: "https://github.com/your-username/ecommerce-website",
-    visitUrl: "https://ecommerce-website-demo.example.com",
+    codeUrl: "https://github.com/Oshiyemi/E-Commerce-website",
+    visitUrl: "https://kodshopping.netlify.app/",
     icon: ShoppingCart,
   },
   {

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="KOD icon">
+  <!-- Uses currentColor so you can recolor via CSS (e.g., .logo{color:#5eead4}) -->
+  <g fill="none" stroke="currentColor" stroke-width="28" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Frame -->
+    <rect x="64" y="64" width="384" height="384" rx="44"/>
+  </g>
+
+  <!-- Letterforms (geometric, scalable) -->
+  <g fill="currentColor">
+    <!-- K -->
+    <rect x="122" y="160" width="34" height="192" rx="14"/>
+    <rect x="156" y="246" width="112" height="34" rx="14" transform="rotate(-35 156 246)"/>
+    <rect x="156" y="232" width="120" height="34" rx="14" transform="rotate(35 156 232)"/>
+
+    <!-- O -->
+    <circle cx="286" cy="256" r="64" fill="none" stroke="currentColor" stroke-width="34"/>
+
+    <!-- D -->
+    <rect x="350" y="180" width="34" height="152" rx="14"/>
+    <path d="M384 180
+             C436 180 468 208 468 256
+             C468 304 436 332 384 332"
+          fill="none" stroke="currentColor" stroke-width="34" stroke-linecap="round"/>
+  </g>
+</svg>
