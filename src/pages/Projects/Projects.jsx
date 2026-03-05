@@ -23,8 +23,9 @@ const PROJECTS = [
     icon: LineChart,
   },
   {
-    title: "Movie Discovery App",
-    summary: "Search titles, save watchlists, and discover trending releases.",
+    title: "Movie Discovery",
+    summary:
+      "Browse trending titles, search by name, and build a personal watchlist with quick updates.",
     codeUrl: "https://github.com/Oshiyemi/Movie-tracker-website.git",
     visitUrl: "https://kod-movietracker.netlify.app/",
     icon: Film,
