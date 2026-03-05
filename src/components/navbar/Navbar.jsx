@@ -3,6 +3,7 @@ import styles from "./Navbar.module.css";
 import logo from "../../assets/new-logo.png";
 import sunIcon from "../../assets/sun.svg";
 import moonIcon from "../../assets/moon.svg";
+import cv from "../../assets/CV.pdf";
 
 const SECTION_IDS = ["home", "skills", "about", "projects", "contact"];
 const THEME_STORAGE_KEY = "portfolio-theme";
@@ -50,6 +51,17 @@ function Navbar() {
     setTheme((previous) => (previous === "dark" ? "light" : "dark"));
   };
 
+  const handleDownloadCv = (event) => {
+    event.preventDefault();
+    const link = document.createElement("a");
+    link.href = cv;
+    link.download = "cv.pdf";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    setMenuOpen(false);
+  };
+
   const isDark = theme === "dark";
 
   return (
@@ -75,7 +87,7 @@ function Navbar() {
           </a>
         ))}
 
-        <a href="/cv.pdf" download className={styles.cv}>
+        <a href={cv} download="cv.pdf" className={styles.cv} onClick={handleDownloadCv}>
           Download CV
           <svg
             xmlns="http://www.w3.org/2000/svg"

@@ -18,8 +18,8 @@ const PROJECTS = [
   {
     title: "Financial Tracker",
     summary: "Track spending, monitor trends, and review category performance with clear visual insights.",
-    codeUrl: "https://github.com/your-username/financial-tracker",
-    visitUrl: "https://financial-tracker-demo.example.com",
+    codeUrl: "https://github.com/Oshiyemi/react-finance-tracker",
+    visitUrl: "https://kod-fintrack.netlify.app/",
     icon: LineChart,
   },
   {
@@ -32,8 +32,8 @@ const PROJECTS = [
   {
     title: "Task Planner",
     summary: "Organize daily priorities with deadlines and status tracking.",
-    codeUrl: "https://github.com/your-username/task-planner",
-    visitUrl: "https://task-planner-demo.example.com",
+    codeUrl: "https://github.com/Oshiyemi/Todo-list-app",
+    visitUrl: "https://kod-taskflow.netlify.app/",
     icon: CheckSquare,
   },
 ];
