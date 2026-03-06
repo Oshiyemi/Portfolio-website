@@ -3,7 +3,7 @@ import styles from "./Navbar.module.css";
 import logo from "../../assets/new-logo.png";
 import sunIcon from "../../assets/sun.svg";
 import moonIcon from "../../assets/moon.svg";
-import cv from "../../assets/CV.pdf";
+import cv from "../../assets/Kashope CV.pdf";
 
 const SECTION_IDS = ["home", "skills", "about", "projects", "contact"];
 const THEME_STORAGE_KEY = "portfolio-theme";
