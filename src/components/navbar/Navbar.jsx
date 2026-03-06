@@ -55,7 +55,7 @@ function Navbar() {
     event.preventDefault();
     const link = document.createElement("a");
     link.href = cv;
-    link.download = "cv.pdf";
+    link.download = "Kashope Software engineer cv.pdf";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
