@@ -87,7 +87,7 @@ function Navbar() {
           </a>
         ))}
 
-        <a href={cv} download="cv.pdf" className={styles.cv} onClick={handleDownloadCv}>
+        <a href={cv} download="Kashope oshiyemi Software Engineer cv.pdf" className={styles.cv} onClick={handleDownloadCv}>
           Download CV
           <svg
             xmlns="http://www.w3.org/2000/svg"
