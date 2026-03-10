@@ -1,10 +1,11 @@
-import Navbar from "./components/navbar/Navbar";
+import About from "./pages/About/About";
+import Contact from "./pages/ContactUs/ContactUs";
 import Footer from "./components/footer/Footer";
 import Home from "./pages/Home/Home";
-import Skills from "./pages/Skills/Skills";
-import About from "./pages/About/About";
+import Navbar from "./components/navbar/Navbar";
+import Experience from "./pages/Experience/Experience";
 import Projects from "./pages/Projects/Projects";
-import Contact from "./pages/ContactUs/ContactUs";
+import Skills from "./pages/Skills/Skills";
 import "./App.css";
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
       <Navbar />
       <main className="appMain">
         <Home />
+        <Experience />
         <Skills />
         <About />
         <Projects />

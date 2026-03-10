@@ -1,8 +1,9 @@
 .siteFooter {
   position: relative;
-  width: min(1220px, 100%);
+  width: min(var(--container-width), 94vw);
+  width: min(var(--container-width), 94dvw);
   margin: 0 auto;
-  padding: 1rem 1.2rem 1.25rem;
+  padding: 1rem 0 1.25rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -16,8 +17,8 @@
   content: "";
   position: absolute;
   top: 0;
-  left: 1.2rem;
-  right: 1.2rem;
+  left: 0;
+  right: 0;
   height: 1px;
   background: linear-gradient(
     90deg,
@@ -39,12 +40,14 @@
 
 @media (max-width: 520px) {
   .siteFooter {
-    padding: 0.9rem 1rem 1.05rem;
+    width: min(var(--container-width), calc(100% - 1.5rem));
+    width: min(var(--container-width), calc(100dvw - 1.5rem));
+    padding: 0.9rem 0 1.05rem;
   }
 
   .siteFooter::before {
-    left: 1rem;
-    right: 1rem;
+    left: 0;
+    right: 0;
   }
 
   .siteFooter__copyright {

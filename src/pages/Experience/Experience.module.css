@@ -1,0 +1,50 @@
+.pageSection {
+  position: relative;
+}
+
+.wrapper {
+  display: grid;
+  gap: clamp(1.35rem, 2.1vw, 1.9rem);
+}
+
+.headerBlock {
+  width: min(100%, 920px);
+  display: grid;
+  gap: 0.62rem;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  padding: 0.36rem 0.74rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  background: var(--color-card);
+  color: var(--color-accent);
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.title {
+  margin: 0;
+margin-top: 1.5rem;
+  color: var(--color-heading);
+  font-size: clamp(1.85rem, 4vw, 2.75rem);
+  line-height: 1.14;
+}
+
+.intro {
+  margin: 0;
+  max-width: 760px;
+  color: var(--color-text-muted);
+  font-size: 0.94rem;
+  line-height: 1.7;
+}
+
+.timeline {
+  display: grid;
+  gap: 0.92rem;
+}

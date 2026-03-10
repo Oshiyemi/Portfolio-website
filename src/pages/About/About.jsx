@@ -1,35 +1,66 @@
+import { createElement } from "react";
+import { Boxes, Monitor, Rocket, Server } from "lucide-react";
+import Approach from "../Approach/Approach";
 import styles from "./About.module.css";
 
-const STATS = [
-  { value: "4+", label: "Years of experience", tag: <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24">
-	<path fill="currentColor" d="M17 4V2H7v2H2v7c0 1.1.9 2 2 2h3.1a5.01 5.01 0 0 0 3.9 3.9v2.18C8 19.54 8 22 8 22h8s0-2.46-3-2.92V16.9a5.01 5.01 0 0 0 3.9-3.9H20c1.1 0 2-.9 2-2V4zM4 11V6h3v5zm16 0h-3V6h3z"></path>
-</svg> },
-  { value: "10+", label: "Projects shipped", tag: <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24"><path fill="currentColor" d="M10.83 7.11c2.238-2.523 5.72-3.61 8.92-3.61a.75.75 0 0 1 .75.75c0 3.2-1.087 6.682-3.61 8.92c-.061 1.016-.375 2.033-.824 2.926c-.5.994-1.195 1.887-1.973 2.478c-.761.578-1.745.963-2.717.601c-.92-.343-1.54-1.25-1.9-2.538l-2.113-2.114c-1.288-.359-2.195-.979-2.538-1.899c-.362-.972.023-1.956.601-2.717c.591-.778 1.484-1.473 2.478-1.973c.893-.449 1.91-.763 2.925-.823M9.5 8.892a7 7 0 0 0-.922.383c-.836.421-1.533.982-1.957 1.54c-.437.576-.493 1.01-.39 1.286c.083.226.352.557 1.094.836c.169-.379.412-.903.717-1.504c.388-.763.882-1.66 1.458-2.54m1.564 7.784c.278.742.61 1.01.836 1.095c.275.102.71.046 1.286-.39c.558-.425 1.119-1.122 1.54-1.958q.227-.451.383-.922a27 27 0 0 1-2.54 1.458c-.602.305-1.126.548-1.505.717m-6.029-.672a2.144 2.144 0 0 1 2.848.088l.009.01c.799.79.786 2.054.103 2.865c-.295.352-.698.606-1.077.792c-.387.19-.804.333-1.175.44a11 11 0 0 1-1.358.295l-.024.003l-.008.001H4.35a.75.75 0 0 1-.843-.842v-.003l.001-.008l.004-.024a7 7 0 0 1 .066-.389c.047-.251.121-.596.228-.971a7.3 7.3 0 0 1 .439-1.178c.185-.38.439-.783.79-1.08M15.687 8.22a.75.75 0 0 0-1.06 0l-.707.707a.75.75 0 0 0 1.06 1.06l.707-.707a.75.75 0 0 0 0-1.06"/></svg>},
-  { value: "15+", label: "Technologies used", tag: <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 1200 1200"><path fill="currentColor" d="m910.143 91.119l-16.916 81.053a196.3 196.3 0 0 0-49.691 14.743l-58.229-58.825l-66.309 53.661l45.354 69.303c-10.104 13.862-18.357 29.104-24.623 45.503l-82.85-.374l-8.906 84.87l81.055 16.914c2.723 17.329 7.746 33.897 14.742 49.545l-58.824 58.376l53.66 66.31l69.303-45.43a196 196 0 0 0 45.504 24.698l-.375 82.774l84.871 8.904l16.838-81.053c17.346-2.722 34.035-7.666 49.695-14.669l58.301 58.825l66.309-53.735l-45.428-69.229a195.8 195.8 0 0 0 24.697-45.503l82.773.3l8.906-84.87l-81.053-16.765c-2.725-17.354-7.66-34.103-14.67-49.77l58.824-58.227l-53.734-66.309l-69.229 45.354c-13.869-10.111-29.17-18.428-45.578-24.697l.373-82.774zm14.068 197.131c2.668.009 5.373.09 8.084.374c43.355 4.555 74.756 43.384 70.201 86.741c-4.555 43.355-43.385 74.83-86.742 70.274c-43.355-4.555-74.83-43.384-70.275-86.739c4.269-40.647 38.724-70.789 78.732-70.65m-608.981 6.96l-11.375 112.711c-23.205 6.187-45.185 15.324-65.486 27.092l-87.714-71.696l-82.55 82.55l71.698 87.788c-11.768 20.308-20.91 42.272-27.092 65.484L0 610.44v116.751l112.71 11.376a268 268 0 0 0 27.092 65.41l-71.698 87.789l82.55 82.55l87.789-71.697a268 268 0 0 0 65.411 27.093l11.375 112.71h116.752l11.301-112.71c23.212-6.183 45.178-15.325 65.484-27.093l87.788 71.697l82.55-82.55l-71.697-87.714c11.768-20.302 20.906-42.281 27.092-65.485l112.711-11.376V610.44L634.5 599.138c-6.186-23.225-15.314-45.243-27.092-65.561l71.697-87.714l-82.55-82.549l-87.713 71.696c-20.316-11.775-42.336-20.905-65.562-27.093l-11.301-112.71H315.23zm58.376 265.61c59.649 0 107.996 48.348 107.996 107.996S433.255 776.81 373.606 776.81S265.61 728.463 265.61 668.816c0-59.648 48.348-107.996 107.996-107.996m495.673 144.219l-11.9 59.273c-12.188 1.993-23.873 5.653-34.877 10.776l-41.012-43.033l-46.553 39.292l31.883 50.667c-7.102 10.143-12.959 21.308-17.363 33.306l-58.15-.301l-6.287 62.118l56.955 12.35a147.7 147.7 0 0 0 10.328 36.298l-41.312 42.659l37.721 48.497l48.721-33.229a136 136 0 0 0 31.957 18.037l-.225 60.621l59.648 6.511l11.824-59.349c12.189-1.991 23.869-5.579 34.875-10.702l41.014 43.033l46.625-39.291l-31.957-50.668c7.104-10.139 12.959-21.312 17.363-33.306l58.229.226l6.211-62.043l-56.953-12.35c-1.914-12.695-5.402-24.911-10.328-36.372l41.311-42.585l-37.719-48.572l-48.646 33.229c-9.746-7.396-20.498-13.449-32.031-18.036l.299-60.546zm9.879 144.144c1.873.009 3.783.092 5.688.301c30.473 3.331 52.521 31.745 49.32 63.465c-3.201 31.719-30.449 54.748-60.922 51.416s-52.596-31.746-49.395-63.466c3.001-29.738 27.19-51.818 55.309-51.716"/></svg> },
-  { value: "2+", label: "Teams collaborated with", tag: <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24"><path fill="currentColor" d="M12.1 21q-.425 0-.712-.288T11.1 20q0-.175.075-.363t.225-.337l4.275-4.275q.15-.15.15-.363t-.15-.362t-.363-.138t-.362.163l-4.25 4.25q-.15.15-.325.225t-.375.075q-.425 0-.712-.288T9 17.876q0-.25.075-.413t.2-.287L13.55 12.9q.15-.15.15-.35t-.15-.35t-.35-.15t-.35.15l-4.275 4.25q-.15.15-.325.225t-.4.075q-.4 0-.7-.3t-.3-.7q0-.2.075-.375t.225-.325l4.25-4.25q.15-.15.15-.363t-.15-.362t-.35-.15t-.35.15L6.45 14.35q-.125.125-.3.2t-.425.075q-.425 0-.712-.288t-.288-.712q0-.2.075-.375t.225-.325l4.9-4.9q.275-.275.688-.25t.687.3l3.05 3.05q.275.275.65.438t.75.162q.8 0 1.4-.562t.6-1.438q0-.35-.125-.725t-.45-.7L13.75 4.875q-.275-.275-.363-.6t.088-.625q.225-.375.575-.55t.775-.175q.525 0 1.075.25t1 .7l4.225 4.25q.45.45.663 1T22 10.4q0 .5-.225 1.013t-.65.937L12.8 20.7q-.2.2-.35.25t-.35.05m-9.2-8.875q-.475-.35-.712-.837T1.95 10.25q0-.575.238-1.125t.687-1L7.1 3.875q.425-.425.938-.65T9.125 3q.625 0 1.213.225t1.012.65L16.475 9q.125.125.213.313t.087.387q0 .425-.287.713t-.713.287q-.2 0-.387-.087t-.313-.213L12 7.35q-.575-.575-1.412-.575t-1.413.575l-4.7 4.7q-.325.325-.762.338t-.813-.263"></path></svg>},
+const HIGHLIGHTS = [
+  {
+    value: "Frontend-heavy",
+    label: "Focused on polished interfaces, interaction details, and responsive systems that feel production-ready.",
+    icon: Monitor,
+  },
+  {
+    value: "Maintainable by default",
+    label: "I structure UI into reusable sections, cards, and modules so product work stays easier to extend.",
+    icon: Boxes,
+  },
+  {
+    value: "Product-focused",
+    label: "I think beyond visuals and work toward flows, hierarchy, and content that support real user goals.",
+    icon: Rocket,
+  },
+  {
+    value: "Full-stack ready",
+    label: "Comfortable supporting frontend builds with API integration and pragmatic backend foundations when needed.",
+    icon: Server,
+  },
 ];
 
 function About() {
   return (
     <section id="about">
-      <h2 className="header">About Me</h2>
-      <div className={styles.container}>
-        <p className={styles.description}>
-          I am a full-stack developer focused on building accessible,
-          high-performance products with React and Node.js. I care about clean
-          architecture, thoughtful design systems, and smooth user interactions
-          that make products feel reliable and intuitive.
-        </p>
+      <div className="sectionInner">
+        <h2 className="header">About Me</h2>
+        <div className={styles.container}>
+          <div className={styles.copyPanel}>
+            <p className={styles.description}>
+              I am a frontend-heavy fullstack developer who enjoys building
+              interfaces that feel polished, useful, and easy to trust from the
+              first interaction.
+            </p>
+            <p className={styles.supportingCopy}>
+              My work sits at the intersection of UI quality, maintainable
+              architecture, and product thinking. I care about responsive
+              layouts, reusable components, clear code structure, and web
+              experiences that support the goals behind the product, not just
+              the screen design.
+            </p>
+          </div>
 
-        <div className={styles.statsGrid}>
-          {STATS.map((item) => (
-            <article key={item.label} className={styles.statCard}>
-              <span className={styles.iconBadge}>{item.tag}</span>
-              <p className={styles.statValue}>{item.value}</p>
-              <p className={styles.statLabel}>{item.label}</p>
-            </article>
-          ))}
+          <div className={styles.statsGrid}>
+            {HIGHLIGHTS.map(({ value, label, icon }) => (
+              <article key={value} className={styles.statCard}>
+                <span className={styles.iconBadge}>
+                  {createElement(icon, { size: 20, strokeWidth: 2 })}
+                </span>
+                <p className={styles.statValue}>{value}</p>
+                <p className={styles.statLabel}>{label}</p>
+              </article>
+            ))}
+          </div>
         </div>
+
+        <Approach />
       </div>
     </section>
   );

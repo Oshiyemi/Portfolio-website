@@ -1,78 +1,73 @@
+import { createElement } from "react";
+import { Monitor, Palette, Server, Workflow } from "lucide-react";
 import styles from "./Skills.module.css";
-import reactIcon from "../../assets/react.svg";
-import javascriptIcon from "../../assets/javascript.svg";
-import htmlIcon from "../../assets/html.svg";
-import cssIcon from "../../assets/css.svg";
-import nodejsIcon from "../../assets/nodejs.svg";
-import tailwindIcon from "../../assets/flowbite--tailwind-solid.svg";
-import githubIcon from "../../assets/github.svg";
-import vscodeIcon from "../../assets/vscode.svg";
 
-const SKILLS = [
+const SKILL_GROUPS = [
   {
-    name: "React",
-    icon: reactIcon,
-    description: "Build dynamic and responsive user interfaces.",
+    title: "Frontend",
+    description:
+      "UI work centered on React, component reuse, responsive layout, and interaction detail.",
+    icon: Monitor,
+    items: ["React", "JavaScript", "HTML5", "CSS3"],
   },
   {
-    name: "JavaScript",
-    icon: javascriptIcon,
-    description: "Core language for interactive web functionality.",
+    title: "Backend",
+    description:
+      "Pragmatic server-side tooling for data-backed features, integrations, and application logic.",
+    icon: Server,
+    items: ["Node.js", "Express.js", "MongoDB", "Python", "REST APIs"],
   },
   {
-    name: "HTML",
-    icon: htmlIcon,
-    description: "Structure web content with semantic markup.",
+    title: "Styling & UI",
+    description:
+      "Frontend presentation focused on polish, maintainability, and strong usability across screen sizes.",
+    icon: Palette,
+    items: ["CSS Modules", "CSS3", "Responsive Design", "Lucide React"],
   },
   {
-    name: "CSS",
-    icon: cssIcon,
-    description: "Style web pages with modern layouts and responsive designs.",
-  },
-  {
-    name: "GitHub",
-    icon: githubIcon,
-    description: "Version control and collaborative code management.",
-  },
-  {
-    name: "VSCode",
-    icon: vscodeIcon,
-    description: "Efficient development with a powerful code editor.",
-  },
-  {
-    name: "Node.js",
-    icon: nodejsIcon,
-    description: "Backend development and server-side scripting.",
-  },
-  {
-    name: "Tailwind",
-    icon: tailwindIcon,
-    description: "Rapid UI styling with utility-first CSS.",
+    title: "Workflow & Tooling",
+    description:
+      "Tools I use to keep delivery organized, fast to iterate on, and easy to collaborate around.",
+    icon: Workflow,
+    items: ["Git", "GitHub", "Vite", "EmailJS"],
   },
 ];
 
 function Skills() {
   return (
     <section id="skills">
-      <h2 className="header">Skills</h2>
-      <p className={styles.subtitle}>
-        Technologies I use to ship modern, scalable web experiences.
-      </p>
+      <div className={`sectionInner ${styles.content}`}>
+        <div className={styles.headerBlock}>
+          <h2 className="header">Tools & Technologies</h2>
+          <p className={styles.subtitle}>
+            My stack stays frontend-first, with enough backend and workflow
+            depth to build products cleanly from interface to integration.
+          </p>
+        </div>
 
-      <div className={styles.grid}>
-        {SKILLS.map((skill) => (
-          <article key={skill.name} className={styles.skillCard}>
-            <span className={styles.skillBadge}>
-              <img
-                src={skill.icon}
-                alt={`${skill.name} logo`}
-                className={styles.skillIcon}
-              />
-            </span>
-            <h3 className={styles.skillName}>{skill.name}</h3>
-            <p className={styles.skillMeta}>{skill.description}</p>
-          </article>
-        ))}
+        <div className={styles.grid}>
+          {SKILL_GROUPS.map(({ title, description, icon, items }) => (
+            <article key={title} className={styles.groupCard}>
+              <div className={styles.groupHeader}>
+                <span className={styles.iconWrap}>
+                  {createElement(icon, { size: 20, strokeWidth: 2 })}
+                </span>
+                <div>
+                  <h3 className={styles.groupTitle}>{title}</h3>
+                  <p className={styles.groupDescription}>{description}</p>
+                </div>
+              </div>
+
+              <ul className={styles.stackList}>
+                {items.map((item) => (
+                  <li key={item} className={styles.stackItem}>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
       </div>
     </section>
   );
